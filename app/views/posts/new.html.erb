@@ -15,7 +15,9 @@
 <ul>
 <% @posts.each do |post| %>
   <li><%= link_to "#{post.title}", "http://#{post.url}", :target => "_blank" %>
-      <%=  "Votes:  #{post.votes.count} Posted by: #{post.user.name}"%>
+      <div class = "post-elements"><%=  "Votes:  #{post.votes.count} Posted by: #{post.user.name}"%></div>
+      <span class = "post-elements"><%=  "Created:  #{post.created_at.pretty_inspect[0..21]}"%></span>
+      <span class = "post-elements"><%=  link_to "Comments:  #{post.comments.count}", post %></span>
 
       <% if post.votes.find_by(:user_id => current_user) == nil && signed_in? %>
         <%= button_to "Vote up", { :controller => :votes,

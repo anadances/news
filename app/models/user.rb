@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   before_create :create_remember_token
   has_many :posts
   has_many :votes
+  has_many :comments
 
   validates_uniqueness_of :email
 

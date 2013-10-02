@@ -1,1 +1,19 @@
 <h2><%= link_to "#{@post.title }", "http://#{@post.url}", :target => "_blank" %></h2>
+
+<%= form_for @comment do |f| %>
+  <%= f.hidden_field :user_id %>
+
+  <%= f.hidden_field :post_id %>
+  <%= f.label :body %>
+  <%= f.text_field :body %>
+  <%= f.submit "Submit" %>
+<% end %>
+
+<% @post.comments.each do |comment| %>
+
+  <li><%= comment.body %>
+
+      <%= "By: #{comment.user.name}" %>
+
+  </li>
+<% end %>  

@@ -9,11 +9,13 @@
 <body>
 <div class="container">
   <%= render 'layouts/header' %>  
-  <%= flash[:notice] %>
-</div>  
+</div> 
+    
 <div class="content">
+  <%= flash[:notice] %>
+  <%= flash[:alert] %>
   <%= yield %>
-</div>  
-
+ 
+</div>
 </body>
 </html>
