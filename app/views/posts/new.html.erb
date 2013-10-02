@@ -1,0 +1,28 @@
+
+<% if signed_in? %>
+  <h1>Create new entry</h1>
+  <div >
+    <%= form_for @post do |f| %>
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+      <%= f.label :url %>
+      <%= f.text_field :url %>
+      <%= f.submit "Post", :class => 'btn btn-succes' %>
+    <% end %>
+  </div> 
+<% end %>     
+
+<ul>
+<% @posts.each do |post| %>
+  <li><%= link_to "#{post.title}", "http://#{post.url}", :target => "_blank" %>
+      <%=  "Votes:  #{post.votes.count} Posted by: #{post.user.name}"%>
+
+      <% if post.votes.find_by(:user_id => current_user) == nil && signed_in? %>
+        <%= button_to "Vote up", { :controller => :votes,
+                                 :action => "show",
+                                 :id => post.id },
+                                 :method => :get %>
+      <% end %>                           
+  </li>
+<% end %>
+</ul>  
