@@ -1,0 +1,17 @@
+<h1>Add Comment</h1>
+
+<%= @comment.user.name %><%= @comment.created_at %>
+<br><%= @comment.body %>
+
+<br>
+<%= form_for @newcomment do |f| %>
+  <%= f.hidden_field :commentable_id %>
+  <%= f.hidden_field :commentable_type %>
+  <%= f.label :reply %>
+  <%= f.text_field :body %>
+  <%= f.submit "Submit" %>
+<% end %>
+
+<%= link_to "Original Post", @comment.post %>
+
+

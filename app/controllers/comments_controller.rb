@@ -8,20 +8,21 @@ class CommentsController < ApplicationController
 
     if @comment.save
      flash[:notice] = "Comment saved"
-     redirect_to @comment.post
+     redirect_to @comment.commentable
     else 
      flash[:alert] = "Invalid input"
-     redirect_to @comment.post
+     redirect_to @comment.commentable
     end  
   end
 
   def show
-   redirect_to @comment.post
+    @comment = Comment.find(params[:id])
+    @newcomment = Comment.new(:commentable_id => @comment.id, :commentable_type => Comment)
   end
 
 
 private
   def comment_params
-    params.require(:comment).permit(:body, :post_id)
+    params.require(:comment).permit(:body, :commentable_type, :commentable_id)
   end
 end   

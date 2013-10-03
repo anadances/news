@@ -3,7 +3,7 @@ class Post < ActiveRecord::Base
   validates :url, presence: true
   has_many :votes
   belongs_to :user
-  has_many :comments
+  has_many :comments, as: :commentable
 
   def self.sort_by_votes
     all.sort_by { |post| post.calculate_score }.reverse

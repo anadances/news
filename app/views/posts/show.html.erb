@@ -1,19 +1,25 @@
 <h2><%= link_to "#{@post.title }", "http://#{@post.url}", :target => "_blank" %></h2>
+ 
 
 <%= form_for @comment do |f| %>
-  <%= f.hidden_field :user_id %>
-
-  <%= f.hidden_field :post_id %>
+  <%= f.hidden_field :commentable_id %>
+  <%= f.hidden_field :commentable_type %>
   <%= f.label :body %>
   <%= f.text_field :body %>
   <%= f.submit "Submit" %>
 <% end %>
 
-<% @post.comments.each do |comment| %>
+<ul>
+  <% @post.comments.each do |comment| %>
 
-  <li><%= comment.body %>
+    <li><%= link_to "#{comment.body}", comment %>
+        <span class = "post-elements"><%= comment.user.name %></span>
+        <ul><% comment.comments.each do |comment| %>
+               <li><%= link_to "#{comment.body}", comment %></li>
+            <% end %> </ul>   
 
-      <%= "By: #{comment.user.name}" %>
+    </li>
+  <% end %>
+</ul>
 
-  </li>
-<% end %>  
+
